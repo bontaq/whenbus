@@ -11,6 +11,13 @@ config :whenbus, Whenbus.Endpoint,
   secret_key_base: "iv5TemZp6kFt6C/14cZGWw1kfRIHnKeTvredwXGDCXOpX804oxmkPpJWOIjzRWfc",
   debug_errors: false
 
+# Configure the database
+config :whenbus, Whenbus.Repo,
+  database: "whenbus",
+  username: "Jack",
+  password: "",
+  hostname: "localhost"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
