@@ -5,7 +5,7 @@ defmodule Whenbus.Mixfile do
     [app: :whenbus,
      version: "0.0.1",
      elixir: "~> 1.0",
-     elixirc_paths: ["lib", "web"],
+     elixirc_paths: ["lib", "web", "tasks"],
      compilers: [:phoenix] ++ Mix.compilers,
      deps: deps]
   end
