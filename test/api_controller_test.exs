@@ -1,5 +1,5 @@
 defmodule Whenbus.ApiControllerTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
 
   import Plug.Test
 
@@ -74,6 +74,24 @@ defmodule Whenbus.ApiControllerTest do
     assert length(res) == 1
     [stop | _] = res
     assert stop.stopId == "10"
+  end
+
+  test "Find stop, multiple stops, with flip search" do
+    %Stop {name: "5th & Wharton",
+           stopId: "10",
+           latitude: 5.5,
+           longitude: 4.5}
+    |> Repo.insert
+    %Stop {name: "Wharton & 5th",
+           stopId: "11",
+           latitude: 5.0,
+           longitude: 4.0}
+    |> Repo.insert
+
+    res = Whenbus.ApiController.search_stops("5 whar")
+    assert length(res) == 2
+    [stopA, stopB] = res
+    assert stopA.stopId == "10"
   end
 
   # test "Too short find request" do

@@ -6,12 +6,11 @@ defmodule Whenbus.ApiController do
   plug :action
 
   def search_stops(name) do
-    regex_name = name
-      |> String.replace(" ", "%")
-      |> (&("%#{&1}%")).()
+    regex_name = [name] ++ ['.*']
+      |> Enum.join("")
 
     query = from s in Whenbus.Stop,
-      where: ilike(s.name, ^regex_name),
+      where: fragment("name ~ ?", ^regex_name),
       select: s
 
     Whenbus.Repo.all(query)
