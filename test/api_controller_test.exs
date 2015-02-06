@@ -38,7 +38,7 @@ defmodule Whenbus.ApiControllerTest do
   # end
 
   test "Find with stop inserted" do
-    %Stop {name: "5th & Wharton",
+    %Stop {name: "5TH & WHARTON",
            stopId: "10",
            latitude: 5.5,
            longitude: 4.5}
@@ -46,14 +46,14 @@ defmodule Whenbus.ApiControllerTest do
 
     res = Whenbus.ApiController.search_stops("Wharton")
     [stop | _] = res
-    assert stop.name == "5th & Wharton"
+    assert stop.name == "5TH & WHARTON"
     assert stop.stopId == "10"
     assert stop.latitude == 5.5
     assert stop.longitude == 4.5
   end
 
   test "Find stop inserted, no match" do
-    %Stop {name: "5th & Wharton",
+    %Stop {name: "5TH & WHARTON",
            stopId: "10",
            latitude: 5.5,
            longitude: 4.5}
@@ -64,7 +64,7 @@ defmodule Whenbus.ApiControllerTest do
   end
 
   test "Find stop, with spaces" do
-    %Stop {name: "5th & Wharton",
+    %Stop {name: "5TH & WHARTON",
            stopId: "10",
            latitude: 5.5,
            longitude: 4.5}
@@ -77,12 +77,12 @@ defmodule Whenbus.ApiControllerTest do
   end
 
   test "Find stop, multiple stops, with flip search" do
-    %Stop {name: "5th & Wharton",
+    %Stop {name: "5TH & WHARTON",
            stopId: "10",
            latitude: 5.5,
            longitude: 4.5}
     |> Repo.insert
-    %Stop {name: "Wharton & 5th",
+    %Stop {name: "WHARTON & 5TH",
            stopId: "11",
            latitude: 5.0,
            longitude: 4.0}
