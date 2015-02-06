@@ -12,7 +12,7 @@ defmodule Mix.Tasks.Whenbus.Load_stops do
     case parse.(lat) do
       :error -> :error
       {f_lat, _} -> %Whenbus.Stop
-                  { name: name,
+                  { name: String.upcase(name),
                     stopId: id,
                     latitude: f_lat,
                     longitude: parse.(lon) |> elem 0 }
