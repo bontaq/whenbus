@@ -1,34 +1,30 @@
-<div class="jumbotron">
-  <h2>Welcome to Phoenix!</h2>
-  <p class="lead">Phoenix is an Elixir Web Framework targeting full-featured, fault tolerant applications with realtime functionality.</p>
-</div>
+<section>
+	<input type="text" id="search" placeholder="Stop intersection&hellip;">
+</section>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+<section id="stops">
+	<h1>
+		<span id="stop">
+		Stops
+		</span>
+	</h1>
+  <div id="info">
+    <p>When you finish typing your stop intersection, wait a moment
+      and the results will appear here.  For example, if you want
+      to search for 18th and Carson St., all you need to type is 18 car!
+    </p>
+</section>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/issues?state=open">Issues</a>
-      </li>
-      <li>
-        <a href="irc://irc.freenode.net/elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/chris_mccord">@chris_mccord</a>
-      </li>
-    </ul>
-  </div>
-</div>
-
+<section id="buses">
+	<h1>
+		<span id="bus">
+		Buses
+		</span>
+	</h1>
+	<div id="bus_time_display">
+    <div id="info">
+      <p>Then select the stop you want, and bus times for the next hour
+        will appear here!
+      </p>
+	</div>
+</section>

@@ -1,0 +1,202 @@
+/* line 6, ../scss/style.scss */
+body {
+  font-family: "Helvetica", "Arial", "Sans-serif";
+  width: 95%;
+}
+
+/* line 11, ../scss/style.scss */
+html, body, #main {
+  height: 88%;
+}
+
+/* line 15, ../scss/style.scss */
+body > #main {
+  height: auto;
+  min-height: 100%;
+}
+
+/* line 20, ../scss/style.scss */
+#more {
+  font-size: 22px;
+  /*  padding-left: 10%;*/
+  border-bottom-style: solid;
+  border-width: 5px;
+  border-color: #70E1FA;
+  cursor: pointer;
+  /*  display: block;*/
+  /*    font-size: 30px;*/
+}
+
+/* line 32, ../scss/style.scss */
+#footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height: 3em;
+  margin-top: -2em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  color: #696969;
+}
+
+/* line 44, ../scss/style.scss */
+#main {
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+/* line 49, ../scss/style.scss */
+#search {
+  width: 50%;
+  height: 30px;
+  font-size: 18px;
+}
+
+/* line 55, ../scss/style.scss */
+.fullBus {
+  cursor: pointer;
+}
+
+/* line 59, ../scss/style.scss */
+#stops {
+  width: 45%;
+  font-size: 18px;
+  text-align: center;
+  float: left;
+  padding-left: 15px;
+  display: block;
+  /*	margin-left: 0px;*/
+}
+/* line 67, ../scss/style.scss */
+#stops p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0px;
+  cursor: pointer;
+}
+/* line 74, ../scss/style.scss */
+#stops h1 {
+  padding-bottom: 9px;
+  text-align: center;
+}
+
+/* line 80, ../scss/style.scss */
+.selected {
+  /*	padding-top: 5px;
+    	padding-bottom: 5px;*/
+  /*	margin: 0px;*/
+  /*	background: $blue;*/
+  /*	border-top-style: solid;*/
+  /*	border-bottom-style: solid;*/
+  /*	border-left-style: solid;*/
+  /*	border-top-width: 1px;*/
+  /*	border-bottom-width: 1px;*/
+  border-color: #70E1FA;
+  background-color: #9EF0FF;
+}
+
+/* line 94, ../scss/style.scss */
+#buses {
+  width: 50%;
+  padding-left: 50%;
+  /* Stupid fix */
+  padding-top: 3px;
+  /*  display: block; */
+}
+/* line 101, ../scss/style.scss */
+#buses h1 {
+  padding-bottom: 9px;
+  margin-bottom: 9px;
+  text-align: center;
+}
+
+/* line 108, ../scss/style.scss */
+#bus_time_display {
+  font-size: 18px;
+  text-align: left;
+  display: block;
+}
+/* line 116, ../scss/style.scss */
+#bus_time_display h1 {
+  padding-right: 5px;
+  font-size: 48px;
+  display: inline;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+/* line 124, ../scss/style.scss */
+#bus_time_display h3 {
+  display: inline;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+/* line 130, ../scss/style.scss */
+#bus_time_display .busTime {
+  font-size: 24px;
+  padding-top: -10px;
+  margin-top: -10px;
+}
+/* line 136, ../scss/style.scss */
+#bus_time_display .headsign {
+  display: inline;
+  color: #696969;
+}
+
+/* line 145, ../scss/style.scss */
+.blue {
+  background-color: #70E1FA;
+}
+
+/* line 149, ../scss/style.scss */
+.green {
+  background-color: #94E07B;
+}
+
+/* line 153, ../scss/style.scss */
+.red {
+  background-color: #FF7A7A;
+}
+
+/* line 157, ../scss/style.scss */
+#info {
+  text-align: left;
+  color: #696969;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 165, ../scss/style.scss */
+#buses #info {
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* line 171, ../scss/style.scss */
+#stop {
+  border-bottom-style: solid;
+  border-width: 5px;
+  border-color: #FF7A7A;
+  font-size: 30px;
+}
+
+/* line 178, ../scss/style.scss */
+#bus {
+  border-bottom-style: solid;
+  border-width: 5px;
+  border-color: #94E07B;
+  font-size: 30px;
+}
+
+/* line 185, ../scss/style.scss */
+header {
+  margin-top: 35px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+/* line 190, ../scss/style.scss */
+header h1 {
+  font-size: 64px;
+}

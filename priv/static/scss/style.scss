@@ -1,0 +1,193 @@
+$green: #94E07B;
+$red:  #FF7A7A;
+$blue: #70E1FA;
+$lightBlue: #9EF0FF;
+
+body {
+    font-family: "Helvetica", "Arial", "Sans-serif";
+    width: 95%;
+}
+
+html, body, #main {
+  height: 88%
+}
+
+body > #main {
+  height: auto;
+  min-height: 100%;
+}
+
+#more {
+  font-size: 22px;
+/*  padding-left: 10%;*/
+	border-bottom-style: solid;
+	border-width: 5px;
+	border-color: $blue;
+    cursor: pointer;
+    
+/*  display: block;*/
+/*    font-size: 30px;*/
+}
+
+#footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height:3em;
+  margin-top: -2em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  color: #696969;
+}
+
+#main {
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+#search {
+	width: 50%;
+	height: 30px;
+	font-size: 18px;
+}
+
+.fullBus {
+    cursor: pointer;
+}
+
+#stops {
+	width: 45%;
+	font-size: 18px;
+	text-align: center;
+	float: left;
+	padding-left: 15px;
+  display: block;
+/*	margin-left: 0px;*/
+	p {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin: 0px;
+        cursor: pointer;
+	}
+	
+	h1 {
+		padding-bottom: 9px;
+		text-align: center;		
+	}
+}
+
+.selected {
+/*	padding-top: 5px;
+  	padding-bottom: 5px;*/
+/*	margin: 0px;*/
+/*	background: $blue;*/
+/*	border-top-style: solid;*/
+/*	border-bottom-style: solid;*/
+/*	border-left-style: solid;*/
+/*	border-top-width: 1px;*/
+/*	border-bottom-width: 1px;*/
+	border-color: $blue;
+	background-color: $lightBlue;
+}
+
+#buses {
+	width: 50%;
+	padding-left: 50%;
+  
+  /* Stupid fix */
+  padding-top: 3px;
+  /*  display: block; */
+	h1 {
+    padding-bottom: 9px;
+    margin-bottom: 9px;
+		text-align: center;
+	}
+}
+
+#bus_time_display {
+	font-size: 18px;
+	text-align: left;
+  display: block;
+	
+	p {
+	}
+	
+	h1 {
+		padding-right: 5px;
+		font-size: 48px;
+		display: inline;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+	}
+  
+  h3 {
+    display: inline;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+	
+	.busTime {
+		font-size:24px;
+    padding-top: -10px;
+    margin-top: -10px;
+	}
+	
+	.headsign {
+		display: inline;
+    color: #696969;
+	}
+	
+	.bus_and_time {
+	}
+}
+
+.blue {
+	background-color: $blue;
+}
+
+.green {
+	background-color: $green;
+}
+
+.red {
+	background-color: $red;
+}
+
+#info {
+  text-align: left;
+  color: #696969;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#buses #info{
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#stop {
+	border-bottom-style: solid;
+	border-width: 5px;
+	border-color: $red;
+    font-size: 30px;
+}
+
+#bus {
+	border-bottom-style: solid;
+	border-width: 5px;
+	border-color: $green;
+    font-size: 30px;
+}
+
+header {
+	margin-top: 35px;
+	margin-bottom: 40px;
+	text-align: center;
+	
+	h1 {
+		font-size: 64px;
+	}
+}
