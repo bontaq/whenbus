@@ -16,33 +16,35 @@ $(document).ready(function(){
 
     if (searchTerm.length > 3) {
       $.ajax({
-        url: "/api/find/" + searchTerm,
+        url: "/api/find",
         type: "GET",
-        // dataType: "json",
+        dataType: "json",
+        data: {
+          "name": searchTerm
+        },
 
         complete: function() {
-          console.log('glory be')
+          console.log('glory be');
         },
 
         success: function( result ) {
-          console.log('glory be 2')
+          console.log('glory be 2');
           $('#stops p').each(function ( i ){
             $( this ).fadeOut('fast', function() {
-              $( this ).remove()
-            })
-          })
-          console.log( result )
-          for (x in result["stops"]) {
-            $('#stops').append('<p style="display:none;" value="' + result["stops"][x]["stopId"] +  '">' + result["stops"][x]["name"] + '</p>')
+              $( this ).remove();
+            });
+          });
+          console.log( result );
+          for (x in result) {
+            $('#stops').append('<p style="display:none;" value="' + result[x]["stopId"] +  '">' + result[x]["name"] + '</p>');
           }
 
           $('#stops p').each(function( i ) {
-            $( this ).delay(250).fadeIn()
-          })
+            $( this ).delay(250).fadeIn();
+          });
         },
 
-        error: function() {
-        },
+        error: function() {}
     	});
     };
 
