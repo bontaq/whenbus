@@ -24,7 +24,7 @@ defmodule Whenbus.Mixfile do
   defp deps do
     [{:phoenix, "~> 0.8.0"},
      {:cowboy, "~> 1.0"},
-     {:postgrex, "~> 0.7.0"},
-     {:ecto, "0.7.1"}]
+     {:postgrex, ">= 0.7.0"},
+     {:ecto, "0.7.2"}]
   end
 end
