@@ -7,7 +7,6 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
   @moduledoc """
   Load every trip from trips.txt into the DB, as Whenbus.Trip
   """
-  # route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
   def build_trip([route_id, service_id, trip_id, headsign, direction, _, _]) do
     unless route_id == "route_id" do
       {parsed_direction, _} = Integer.parse(direction)

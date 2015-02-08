@@ -3,8 +3,9 @@ defmodule Whenbus.ApiControllerTest do
 
   import Plug.Test
 
-  alias Whenbus.Stop
   alias Whenbus.Repo
+  alias Whenbus.Stop
+  alias Whenbus.StopTime
 
   # reset DB after each test
   setup do
@@ -24,7 +25,7 @@ defmodule Whenbus.ApiControllerTest do
 
   test "Bad find request" do
     conn = call(Whenbus.Router, :get, "api/find?b=b")
-    assert conn.resp_body == "That's no good"
+    assert conn.resp_body == "That's no good - from find stops"
   end
 
   test "Good find request, no stops inserted" do
@@ -87,8 +88,7 @@ defmodule Whenbus.ApiControllerTest do
            latitude: 5.0,
            longitude: 4.0}
     |> Repo.insert
-
-    res = Whenbus.ApiController.search_stops("5 whar")
+   res = Whenbus.ApiController.search_stops("5 whar")
     assert length(res) == 2
     [stopA, stopB] = res
     assert stopA.stopId == "10"
@@ -109,4 +109,29 @@ defmodule Whenbus.ApiControllerTest do
   # test "Find via lat / lon" do
   #   # to be implemented
   # end
+
+  test "Return stops from stop id and time" do
+    %StopTime{
+            tripId: "1",
+            departureTime: {10, 10, 10},
+            stopId: "2",
+            stopSequence: "3"
+        }
+    |> Repo.insert
+    res = Whenbus.ApiController.search_stop_times("2", 1)
+    assert (length res) > 0
+  end
+
+  test "Return JSON stoptime" do
+    %StopTime{
+            tripId: "1",
+            departureTime: {10, 10, 10},
+            stopId: "2",
+            stopSequence: "3"
+        }
+    |> Repo.insert
+    conn = call(Whenbus.Router, :get, "api/stoptimes?stopId=2&time=test")
+    [res] = Poison.decode! conn.resp_body
+    assert res == "2"
+  end
 end
