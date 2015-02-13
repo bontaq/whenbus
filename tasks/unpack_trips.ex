@@ -10,12 +10,23 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
   def build_trip([route_id, service_id, trip_id, headsign, direction, _, _]) do
     unless route_id == "route_id" do
       {parsed_direction, _} = Integer.parse(direction)
+      [parsed_route, _] = route_id
+        |> String.lstrip(?0)
+        |> String.split("-")
+
+      weekday = String.contains?(service_id, "Weekday")
+      saturday = String.contains?(service_id, "Saturday")
+      sunday = String.contains?(service_id, "Sunday")
+
       %Whenbus.Trip
-      { route: route_id,
+      { route: parsed_route,
         serviceId: service_id,
         tripId: trip_id,
         tripHeadsign: headsign,
-        direction: parsed_direction }
+        direction: parsed_direction,
+        weekday: weekday,
+        saturday: saturday,
+        sunday: sunday}
     else
       :error
     end

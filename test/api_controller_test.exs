@@ -6,6 +6,7 @@ defmodule Whenbus.ApiControllerTest do
   alias Whenbus.Repo
   alias Whenbus.Stop
   alias Whenbus.StopTime
+  alias Whenbus.Trip
 
   # reset DB after each test
   setup do
@@ -88,7 +89,7 @@ defmodule Whenbus.ApiControllerTest do
            latitude: 5.0,
            longitude: 4.0}
     |> Repo.insert
-   res = Whenbus.ApiController.search_stops("5 whar")
+    res = Whenbus.ApiController.search_stops("5 whar")
     assert length(res) == 2
     [stopA, stopB] = res
     assert stopA.stopId == "10"
@@ -130,8 +131,34 @@ defmodule Whenbus.ApiControllerTest do
             stopSequence: "3"
         }
     |> Repo.insert
+    %Trip {
+            route: "0",
+            serviceId: "1",
+            tripId: "1",
+            tripHeadsign: "3",
+            direction: 0
+        }
+    |> Repo.insert
     conn = call(Whenbus.Router, :get, "api/stoptimes?stopId=2&time=test")
-    [res] = Poison.decode! conn.resp_body
-    assert res == "2"
+
+    [%{"stop" => stop, "trip" => trip}] = Poison.decode! conn.resp_body
+    assert trip["route"] == "0"
+    assert trip["tripHeadsign"] == "3"
+    assert stop["tripId"] == "1"
+    assert stop["stopId"] == "2"
+  end
+
+  test "Get stop name" do
+    %Trip{
+            route: "0",
+            serviceId: "1",
+            tripId: "2",
+            tripHeadsign: "3",
+            direction: 0,
+        }
+    |> Repo.insert
+    %{:route => route, :serviceId => serviceId} = Whenbus.ApiController.get_trip("2")
+    assert route == "0"
+    assert serviceId == "1"
   end
 end

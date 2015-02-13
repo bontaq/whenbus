@@ -27,6 +27,10 @@ defmodule Whenbus.ApiController do
     text(conn, "That's no good - from find stops")
   end
 
+  def get_trip(tripId) do
+    Whenbus.Repo.one from t in Whenbus.Trip, where: t.tripId == ^tripId
+  end
+
   def search_stop_times(stop_id, time) do
     query = from s in Whenbus.StopTime,
       where: ^stop_id == s.stopId,
@@ -36,8 +40,13 @@ defmodule Whenbus.ApiController do
 
   def stop_times(conn, %{"stopId" => stop_id, "time" => time}) do
     results = search_stop_times(stop_id, time)
+      # Poison can't parse the time tuple
       |> Enum.map(fn(x) -> %{x | departureTime: Tuple.to_list(x.departureTime)} end)
-    json(conn, results)
+    trips = Enum.map(results, fn(%{:tripId => id}) -> get_trip(id) end)
+    final_results = Enum.zip(results, trips)
+      |> Enum.map(fn({x, y}) -> %{:stop => x, :trip => y} end)
+
+    json(conn, final_results)
   end
 
   def stop_times(conn, _) do

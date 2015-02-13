@@ -60,25 +60,30 @@ $(document).ready(function(){
         continue;
       };
 
+      var time = result[x]["stop"]["departureTime"],
+          amOrPm = 24 >= time[0] >= 12 ? 'am' : 'pm',
+          hours = time[0] >= 24 ? time[0] - 24 : time[0],
+          parsedTime = ([hours, time[1]].join(":")) + amOrPm;
+
       $('#bus_time_display').append(
         '<div class="fullBus">' +
 	  '<div class="bus_and_time">' +
-          '<h1>' + result["buses"][x]["busName"] + '</h1>'+
-          '<h3>@</h3>' + '<div class="busTime">' + result["buses"][x]["time"] +
+          '<h1>' + result[x]["trip"]["route"] + '</h1>'+
+          '<h3>@</h3>' + '<div class="busTime">' + parsedTime +
 	  '</div>' +
 	  '</div>' +
 	  '<div class="headsign">' +
-	  result["buses"][x]["tripHeadsign"] + '</div>' +
+	  result[x]["trip"]["tripHeadsign"] + '</div>' +
           '</div>'
       );
     }
 
     $('#bus_time_display p').each(function( i ) {
-      $( this ).delay(100).fadeIn();
+      $(this).delay(100).fadeIn();
     });
 
     $('.fullBus').each(function( i ){
-      $( this ).on("click", "", function(){
+      $(this).on("click", "", function(){
         select_bus( this );
       });
     });
@@ -144,10 +149,10 @@ $(document).ready(function(){
       type: "GET",
       dataType: "json",
       data: {
-        'stopId': $( this ).attr("value"),
+        'stopId': $(this).attr("value"),
         'time': currentTime
       },
-      success: function( result ) {
+      success: function(result) {
 	$('#bus_time_display').fadeOut('fast', function(){
   	  $('#bus_time_display').empty();
   	  add_buses(result);
