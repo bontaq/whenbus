@@ -20,9 +20,9 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
 
       %Whenbus.Trip
       { route: parsed_route,
-        serviceId: service_id,
-        tripId: trip_id,
-        tripHeadsign: headsign,
+        service_id: service_id,
+        trip_id: trip_id,
+        headsign: headsign,
         direction: parsed_direction,
         weekday: weekday,
         saturday: saturday,
@@ -36,7 +36,7 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
   end
 
   def exists(trip) do
-    query = from s in Whenbus.Trip, where: s.serviceId == ^trip.serviceId
+    query = from s in Whenbus.Trip, where: s.service_id == ^trip.service_id
     (length Whenbus.Repo.all(query)) >= 1
   end
 

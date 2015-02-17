@@ -23,17 +23,17 @@ defmodule Mix.Tasks.Whenbus.Load_times do
       end
 
       %Whenbus.StopTime
-      { tripId: trip_id,
-        departureTime: parsed_time,
-        stopId: stop_id,
-        stopSequence: stop_seq }
+      { trip_id: trip_id,
+        departure_time: parsed_time,
+        stop_id: stop_id,
+        stop_sequence: stop_seq }
     else
       :error
     end
   end
 
   def exists(stop) do
-    query = from s in Whenbus.StopTime, where: s.stopSequence == ^stop.stopSequence
+    query = from s in Whenbus.StopTime, where: s.stop_sequence == ^stop.stop_sequence
     (length Whenbus.Repo.all(query)) >= 1
   end
 

@@ -4,7 +4,7 @@ defmodule Whenbus.Repo.Migrations.InitialStopsCreate do
   def up do
     create table(:stops) do
       add :name, :string, size: 255
-      add :stopId, :string, size: 255
+      add :stop_id, :string, size: 255
       add :latitude, :float
       add :longitude, :float
     end

@@ -3,9 +3,9 @@ defmodule Whenbus.Trip do
 
   schema "trips" do
     field :route, :string
-    field :serviceId, :string
-    field :tripId, :string
-    field :tripHeadsign, :string
+    field :service_id, :string
+    field :trip_id, :string
+    field :headsign, :string
     field :direction, :integer
     field :weekday, :boolean, default: false
     field :saturday, :boolean, default: false

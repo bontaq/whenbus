@@ -3,10 +3,10 @@ defmodule Whenbus.Repo.Migrations.AddStopTimes do
 
   def up do
     create table(:stop_times) do
-      add :tripId, :string, size: 255
-      add :departureTime, :time
-      add :stopId, :string, size: 255
-      add :stopSequence, :string, size: 255
+      add :trip_id, :string, size: 255
+      add :departure_time, :time
+      add :stop_id, :string, size: 255
+      add :stop_sequence, :string, size: 255
     end
   end
 
