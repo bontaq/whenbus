@@ -31,10 +31,20 @@ defmodule Whenbus.ApiController do
     Whenbus.Repo.one from t in Whenbus.Trip, where: t.tripId == ^tripId
   end
 
-  def search_stop_times(stop_id, time) do
+  def search_stop_times(stop_id, %{"date" => date, "time" => time}) do
+    parsedTime = Enum.map(time, fn(x) -> Integer.parse(x) end)
+      |> Enum.map(fn(x) -> elem(x, 0) end)
+      |> List.to_tuple
+    {hour, minute, second} = parsedTime
+    futureTime = {(hour + 1), minute, second}
+
     query = from s in Whenbus.StopTime,
-      where: ^stop_id == s.stopId,
-      select: s
+      where: ^stop_id == s.stopId
+        and s.departureTime > ^parsedTime
+        and s.departureTime < ^futureTime,
+      select: s,
+      order_by: s.departureTime
+
     Whenbus.Repo.all(query)
   end
 

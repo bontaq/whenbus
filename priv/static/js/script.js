@@ -137,7 +137,19 @@ $(document).ready(function(){
   $('#stops').on("click", "p", function(){
     var busName = "",
         hourOffset = 0,
-        currentTime = (new Date()).toJSON();
+        currentTime = new Date(),
+        formattedTime = {
+          date: [
+            currentTime.getFullYear(),
+            currentTime.getMonth(),
+            currentTime.getDate()
+        ],
+          time: [
+            currentTime.getHours(),
+            currentTime.getMinutes(),
+            0
+          ]
+        };
 
     $('#stops p').each(function() {
       $(this).removeClass("selected");
@@ -150,7 +162,7 @@ $(document).ready(function(){
       dataType: "json",
       data: {
         'stopId': $(this).attr("value"),
-        'time': currentTime
+        'time': formattedTime
       },
       success: function(result) {
 	$('#bus_time_display').fadeOut('fast', function(){
