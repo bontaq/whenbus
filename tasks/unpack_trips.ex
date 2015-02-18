@@ -37,7 +37,7 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
 
   def exists(trip) do
     query = from s in Whenbus.Trip, where: s.service_id == ^trip.service_id
-    (length Whenbus.Repo.all(query)) >= 1
+    (length Whenbus.Repo.all(query, [{:log, false}])) >= 1
   end
 
   def run(_) do
@@ -48,6 +48,6 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
     |> Enum.map(fn(row) -> build_trip(row) end)  # create objects
     |> Enum.filter(fn(row) -> row != :error end)  # remove errors
     |> Enum.filter(fn(trip) -> not exists(trip) end)  # check not already in DB
-    |> Enum.map(fn(trip) -> Whenbus.Repo.insert trip end) # insert rows
+    |> Enum.map(fn(trip) -> Whenbus.Repo.insert(trip, [{:log, false}]) end) # insert rows
   end
 end
