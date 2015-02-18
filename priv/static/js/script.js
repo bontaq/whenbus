@@ -29,7 +29,7 @@ $(document).ready(function(){
             });
           });
           for (x in result) {
-            $('#stops').append('<p style="display:none;" value="' + result[x]["stopId"] +  '">' + result[x]["name"] + '</p>');
+            $('#stops').append('<p style="display:none;" value="' + result[x]["stop_id"] +  '">' + result[x]["name"] + '</p>');
           }
 
           $('#stops p').each(function( i ) {
@@ -60,10 +60,11 @@ $(document).ready(function(){
         continue;
       };
 
-      var time = result[x]["stop"]["departureTime"],
+      var time = result[x]["departure_time"],
           amOrPm = 24 >= time[0] >= 12 ? 'am' : 'pm',
           hours = time[0] >= 24 ? time[0] - 24 : time[0],
-          parsedTime = ([hours, time[1]].join(":")) + amOrPm;
+          minutes = time[1] < 10 ? '0' + time[1].toString() : time[1],
+          parsedTime = ([hours, minutes].join(":")) + amOrPm;
 
       $('#bus_time_display').append(
         '<div class="fullBus">' +
@@ -73,7 +74,7 @@ $(document).ready(function(){
 	  '</div>' +
 	  '</div>' +
 	  '<div class="headsign">' +
-	  result[x]["trip"]["tripHeadsign"] + '</div>' +
+	  result[x]["trip"]["headsign"] + '</div>' +
           '</div>'
       );
     }

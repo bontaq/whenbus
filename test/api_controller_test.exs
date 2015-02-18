@@ -93,6 +93,7 @@ defmodule Whenbus.ApiControllerTest do
     assert length(res) == 2
     [stopA, stopB] = res
     assert stopA.stop_id == "10"
+    assert stopB.stop_id == "11"
   end
 
   # test "Too short find request" do
@@ -151,11 +152,11 @@ defmodule Whenbus.ApiControllerTest do
         }
     |> Repo.insert
     conn = call(Whenbus.Router, :get, "api/stoptimes?stopId=2&time%5Bdate%5D%5B%5D=2015&time%5Bdate%5D%5B%5D=1&time%5Bdate%5D%5B%5D=16&time%5Btime%5D%5B%5D=10&time%5Btime%5D%5B%5D=9&time%5Btime%5D%5B%5D=0")
-    [%{"stop" => stop, "trip" => trip}] = Poison.decode! conn.resp_body
-    assert trip["route"] == "0"
-    assert trip["headsign"] == "3"
-    assert stop["trip_id"] == "1"
-    assert stop["stop_id"] == "2"
+    [res] = Poison.decode! conn.resp_body
+    assert res["trip"]["route"] == "0"
+    assert res["trip"]["headsign"] == "3"
+    assert res["stop_id"] == "2"
+    assert res["trip_id"] == "1"
   end
 
   test "Get stop name" do
@@ -201,5 +202,29 @@ defmodule Whenbus.ApiControllerTest do
       %{"date" => ["2015", "1", "16"], "time" => ["10", "9", "0"]}
     )
     assert length(res) == 1
+  end
+
+  test "trip is associated with stop_time" do
+    %Trip {
+            route: "0",
+            service_id: "1",
+            trip_id: "1",
+            headsign: "3",
+            direction: 0
+        }
+    |> Repo.insert
+    %StopTime{
+            trip_id: "1",
+            departure_time: {10, 10, 0},
+            stop_id: "2",
+            stop_sequence: "3"
+        }
+    |> Repo.insert
+    [res] = Whenbus.ApiController.search_stop_times(
+      "2",
+      %{"date" => ["2015", "1", "16"], "time" => ["10", "9", "0"]}
+    )
+    assert res.trip.route == "0"
+
   end
 end
