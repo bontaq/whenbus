@@ -11,12 +11,15 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
     unless route_id == "route_id" do
       {parsed_direction, _} = Integer.parse(direction)
       [parsed_route, _] = route_id
-        |> String.lstrip(?0)
-        |> String.split("-")
+      |> String.lstrip(?0)
+      |> String.split("-")
 
-      weekday = String.contains?(service_id, "Weekday")
-      saturday = String.contains?(service_id, "Saturday")
-      sunday = String.contains?(service_id, "Sunday")
+      day_type = cond do
+        String.contains?(service_id, "Weekday") -> 0
+        String.contains?(service_id, "Saturday") -> 1
+        String.contains?(service_id, "Sunday") -> 2
+        true -> 0
+      end
 
       %Whenbus.Trip
       { route: parsed_route,
@@ -24,9 +27,7 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
         trip_id: trip_id,
         headsign: headsign,
         direction: parsed_direction,
-        weekday: weekday,
-        saturday: saturday,
-        sunday: sunday}
+        day_type: day_type}
     else
       :error
     end
@@ -47,7 +48,7 @@ defmodule Mix.Tasks.Whenbus.Load_trips do
     |> Enum.map(fn(x) -> String.split(x, ",") end)
     |> Enum.map(fn(row) -> build_trip(row) end)  # create objects
     |> Enum.filter(fn(row) -> row != :error end)  # remove errors
-    |> Enum.filter(fn(trip) -> not exists(trip) end)  # check not already in DB
+    # |> Enum.filter(fn(trip) -> not exists(trip) end)  # check not already in DB
     |> Enum.map(fn(trip) -> Whenbus.Repo.insert(trip, [{:log, false}]) end) # insert rows
   end
 end

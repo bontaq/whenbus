@@ -7,8 +7,6 @@ defmodule Whenbus.Trip do
     field :trip_id, :string
     field :headsign, :string
     field :direction, :integer
-    field :weekday, :boolean, default: false
-    field :saturday, :boolean, default: false
-    field :sunday, :boolean, default: false
+    field :day_type, :integer   # 0: weekday, 1: saturday, 2: sunday
   end
 end

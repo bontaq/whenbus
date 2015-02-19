@@ -118,7 +118,8 @@ defmodule Whenbus.ApiControllerTest do
             service_id: "1",
             trip_id: "1",
             headsign: "3",
-            direction: 0
+            direction: 0,
+            day_type: 0
         }
     |> Repo.insert
     %StopTime{
@@ -130,7 +131,7 @@ defmodule Whenbus.ApiControllerTest do
     |> Repo.insert
     res = Whenbus.ApiController.search_stop_times(
       "2",
-      %{"date" => ["2015", "1", "16"], "time" => ["13", "9", "0"]}
+      %{"date" => {2015, 1, 16}, "time" => {10, 9, 0}}
     )
     assert (length res) > 0
   end
@@ -141,7 +142,8 @@ defmodule Whenbus.ApiControllerTest do
             service_id: "1",
             trip_id: "1",
             headsign: "3",
-            direction: 0
+            direction: 0,
+            day_type: 0
         }
     |> Repo.insert
     %StopTime{
@@ -179,7 +181,8 @@ defmodule Whenbus.ApiControllerTest do
             service_id: "1",
             trip_id: "1",
             headsign: "3",
-            direction: 0
+            direction: 0,
+            day_type: 0
         }
     |> Repo.insert
     %StopTime{
@@ -199,7 +202,7 @@ defmodule Whenbus.ApiControllerTest do
 
     res = Whenbus.ApiController.search_stop_times(
       "2",
-      %{"date" => ["2015", "1", "16"], "time" => ["10", "9", "0"]}
+      %{"date" => {2015, 1, 16}, "time" => {10, 9, 0}}
     )
     assert length(res) == 1
   end
@@ -210,7 +213,8 @@ defmodule Whenbus.ApiControllerTest do
             service_id: "1",
             trip_id: "1",
             headsign: "3",
-            direction: 0
+            direction: 0,
+            day_type: 0
         }
     |> Repo.insert
     %StopTime{
@@ -222,9 +226,40 @@ defmodule Whenbus.ApiControllerTest do
     |> Repo.insert
     [res] = Whenbus.ApiController.search_stop_times(
       "2",
-      %{"date" => ["2015", "1", "16"], "time" => ["10", "9", "0"]}
+      %{"date" => {2015, 1, 16}, "time" => {10, 9, 0}}
     )
     assert res.trip.route == "0"
+  end
 
+  test "one_day_ago" do
+    res = Whenbus.ApiController.one_day_ago({2015, 1, 10})
+    assert res == {2015, 1, 9}
+    border = Whenbus.ApiController.one_day_ago({2015, 1, 1})
+    assert border == {2014, 12, 31}
+  end
+
+  test "which_day returns weekday for weekday" do
+    res = Whenbus.ApiController.which_day({2015, 2, 18}, {10, 10, 10})
+    assert res == :weekday
+  end
+
+  test "which_day returns sunday for sunday" do
+    res = Whenbus.ApiController.which_day({2015, 2, 15}, {10, 10, 10})
+    assert res == :sunday
+  end
+
+  test "which_day returns saturday for saturday" do
+    res = Whenbus.ApiController.which_day({2015, 2, 14}, {10, 10, 10})
+    assert res == :saturday
+  end
+
+  test "which_day after midnight saturday" do
+    res = Whenbus.ApiController.which_day({2015, 2, 14}, {1, 10, 0})
+    assert res == :weekday
+  end
+
+  test "wich_day after midnight monday" do
+    res = Whenbus.ApiController.which_day({2015, 2, 16}, {1, 10, 0})
+    assert res == :sunday
   end
 end
