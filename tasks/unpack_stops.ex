@@ -13,15 +13,15 @@ defmodule Mix.Tasks.Whenbus.Load_stops do
       :error -> :error
       {f_lat, _} -> %Whenbus.Stop
                   { name: String.upcase(name),
-                    stopId: id,
+                    stop_id: id,
                     latitude: f_lat,
                     longitude: parse.(lon) |> elem 0 }
     end
   end
 
   def exists(stop) do
-    query = from s in Whenbus.Stop, where: s.stopId == ^stop.stopId
-    (length Whenbus.Repo.all(query)) >= 1
+    query = from s in Whenbus.Stop, where: s.stop_id == ^stop.stop_id
+    (length Whenbus.Repo.all(query, [{:log, false}])) >= 1
   end
 
   def run(_) do
@@ -32,6 +32,6 @@ defmodule Mix.Tasks.Whenbus.Load_stops do
     |> Enum.map(fn(row) -> build_stop(row) end)  # create objects
     |> Enum.filter(fn(row) -> row != :error end)  # remove errors
     |> Enum.filter(fn(stop) -> not exists(stop) end)  # check not already in DB
-    |> Enum.map(fn(stop) -> Whenbus.Repo.insert stop end) # insert rows
+    |> Enum.map(fn(stop) -> Whenbus.Repo.insert(stop, [{:log, false}]) end) # insert rows
   end
 end

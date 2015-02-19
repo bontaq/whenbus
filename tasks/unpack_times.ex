@@ -23,28 +23,33 @@ defmodule Mix.Tasks.Whenbus.Load_times do
       end
 
       %Whenbus.StopTime
-      { tripId: trip_id,
-        departureTime: parsed_time,
-        stopId: stop_id,
-        stopSequence: stop_seq }
+      { trip_id: trip_id,
+        departure_time: parsed_time,
+        stop_id: stop_id,
+        stop_sequence: stop_seq }
     else
       :error
     end
   end
 
   def exists(stop) do
-    query = from s in Whenbus.StopTime, where: s.stopSequence == ^stop.stopSequence
-    (length Whenbus.Repo.all(query)) >= 1
+    query = from s in Whenbus.StopTime,
+      where: s.stop_sequence == ^stop.stop_sequence,
+      lock: "FOR SHARE NOWAIT"
+    Whenbus.Repo.one(query, [{:log, false}]) != nil
   end
 
   def run(_) do
     Whenbus.Repo.start_link()
 
     File.stream!("route_data/stop_times.txt")
-    |> Enum.map(fn(x) -> String.split(x, ",") end)
-    |> Enum.map(fn(row) -> build_stop_time(row) end)  # create objects
-    |> Enum.filter(fn(row) -> row != :error end)  # remove errors
-    |> Enum.filter(fn(stop) -> not exists(stop) end)  # check not already in DB
-    |> Enum.map(fn(stop) -> Whenbus.Repo.insert stop end) # insert rows
+    |> Stream.map(fn(x) -> String.split(x, ",") end)
+    |> Stream.map(fn(row) -> build_stop_time(row) end)  # create objects
+    |> Stream.filter(fn(row) -> row != :error end)  # remove errors
+    # |> Stream.filter(fn(stop) -> not exists(stop) end)  # check not already in DB
+    |> Stream.map(fn(stop) -> Whenbus.Repo.insert(stop, [{:log, false}]) end)
+    |> Stream.run
+
+    # Enum.map(to_insert, fn(stop) -> Whenbus.Repo.insert(stop, [{:log, false}]) end) # insert rows
   end
 end

@@ -4,9 +4,9 @@ defmodule Whenbus.Repo.Migrations.AddTrips do
   def up do
     create table(:trips) do
       add :route, :string, size: 255
-      add :serviceId, :string, size: 255
-      add :tripId, :string, size: 255
-      add :tripHeadsign, :string, size: 255
+      add :service_id, :string, size: 255
+      add :trip_id, :string, size: 255
+      add :headsign, :string, size: 255
       add :direction, :integer
     end
   end

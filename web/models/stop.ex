@@ -3,7 +3,7 @@ defmodule Whenbus.Stop do
 
   schema "stops" do
     field :name, :string
-    field :stopId, :string
+    field :stop_id, :string
     field :latitude, :float
     field :longitude, :float
   end
