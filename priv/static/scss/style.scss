@@ -23,9 +23,27 @@ body > #main {
   min-height: 100%;
 }
 
+header {
+  margin-top: 35px;
+  margin-bottom: 40px;
+  text-align: center;
+  @media screen and (max-width: 1023px) {
+    margin-top: 0px;
+    h1 {
+      margin-top: 10px;
+    }
+  }
+  h1 {
+    font-size: 4.5em;
+  }
+}
+
 #magic-whenbus {
   position: relative;
   height: 9em;
+  @media screen and (max-width: 1023px) {
+    height: 5em;
+  }
   h1 {
     position: absolute;
     width: 100%;
@@ -228,14 +246,4 @@ body > #main {
   border-width: 2px;
   border-color: $green;
   font-size: 25px;
-}
-
-header {
-  margin-top: 35px;
-  margin-bottom: 40px;
-  text-align: center;
-
-  h1 {
-    font-size: 4.5em;
-  }
 }
