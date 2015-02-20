@@ -23,16 +23,22 @@ $(document).ready(function(){
           "name": searchTerm
         },
         success: function( result ) {
-          $('#stops p').each(function ( i ){
-            $( this ).fadeOut('fast', function() {
-              $( this ).remove();
+          $('#stops .stop-name').each(function ( i ){
+            $(this).fadeOut('fast', function() {
+              $(this).remove();
             });
           });
           for (x in result) {
-            $('#stops').append('<p style="display:none;" value="' + result[x]["stop_id"] +  '">' + result[x]["name"] + '</p>');
+            $('#stops').append(
+              '<div class="stop-name" style="display: none;" value="' +
+                result[x]["stop_id"] + '">' +
+                '<span class="mini-button"></span>' +
+                '<span class="stop-name-text">' +
+                result[x]["name"] + '</span>' +
+                '</div>');
           }
 
-          $('#stops p').each(function( i ) {
+          $('#stops div').each(function( i ) {
             $(this).delay(250).fadeIn();
           });
         }
@@ -90,7 +96,7 @@ $(document).ready(function(){
     });
 
     $('#bus_time_display').slideDown();
-    $('#bus_time_display').append('<p><span id="more">Next Hour</span></p>');
+    $('#bus_time_display').append('<p><span id="more">next hour</span></p>');
   };
 
   // function next_hour() {
@@ -135,7 +141,7 @@ $(document).ready(function(){
   //   });
   // };
 
-  $('#stops').on("click", "p", function(){
+  $('#stops').on("click", "div", function(){
     var busName = "",
         hourOffset = 0,
         currentTime = new Date(),
@@ -150,12 +156,14 @@ $(document).ready(function(){
             currentTime.getMinutes(),
             0
           ]
-        };
+        },
+        $self = $(this);
 
-    $('#stops p').each(function() {
+    $('#stops div').each(function() {
       $(this).removeClass("selected");
+      $(this).removeClass("success");
     });
-    $(this).addClass("selected");
+    $self.addClass("selected");
 
     $.ajax({
       url: "/api/stoptimes",
@@ -169,6 +177,7 @@ $(document).ready(function(){
 	$('#bus_time_display').fadeOut('fast', function(){
   	  $('#bus_time_display').empty();
   	  add_buses(result);
+          $self.addClass("success");
 
           $('#more').on("click", "", function(){
             // next_hour();

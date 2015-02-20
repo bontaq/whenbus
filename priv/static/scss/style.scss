@@ -1,10 +1,16 @@
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+
 $green: #94E07B;
+$lightGreen: #B1DEA2;
 $red:  #FF7A7A;
+$lightRed: #FFA8A8;
 $blue: #70E1FA;
 $lightBlue: #9EF0FF;
 
 body {
     font-family: "Helvetica", "Arial", "Sans-serif";
+    color: #373737;
     width: 95%;
 }
 
@@ -17,16 +23,48 @@ body > #main {
   min-height: 100%;
 }
 
+#magic-whenbus {
+  position: relative;
+  height: 9em;
+  h1 {
+    position: absolute;
+    width: 100%;
+    &.first {
+      color: $red;
+      left: -0px;
+    }
+    &.second {
+      color: $lightBlue;
+      left: -3px;
+      top: 3px;
+      z-index: -1;
+    }
+    &.third {
+      color: $green;
+      left: -6px;
+      top: 6px;
+      z-index: -2;
+    }
+  }
+}
+
 #more {
+  display: inline-block;
   font-size: 22px;
-/*  padding-left: 10%;*/
-	border-bottom-style: solid;
-	border-width: 5px;
-	border-color: $blue;
-    cursor: pointer;
-    
-/*  display: block;*/
-/*    font-size: 30px;*/
+  border-style: solid;
+  border-width: 2px;
+  border-color: $blue;
+  cursor: pointer;
+  padding: 7px 5px 5px 5px;
+  margin-top: 2px;
+  @include border-radius(4px, 4px);
+  h1 {
+    font-weight: normal;
+  }
+  &:hover {
+    margin-top: 0px;
+    border-bottom-width: 4px;
+  }
 }
 
 #footer {
@@ -42,124 +80,134 @@ body > #main {
 }
 
 #main {
-	text-align: center;
-	padding-bottom: 15px;
+  text-align: center;
+  padding-bottom: 15px;
 }
 
 #search {
-	width: 50%;
-	height: 30px;
-	font-size: 18px;
+  height: 30px;
+  font-size: 22px;
+  text-align: center;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  @include transition(border, 0.3s);
+  &:focus {
+    outline: none;
+    border-bottom: solid 2px #969696;
+  }
 }
 
 .fullBus {
-    cursor: pointer;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-#stops {
-	width: 45%;
-	font-size: 18px;
-	text-align: center;
-	float: left;
-	padding-left: 15px;
-  display: block;
-/*	margin-left: 0px;*/
-	p {
-		padding-top: 10px;
-		padding-bottom: 10px;
-		margin: 0px;
-        cursor: pointer;
-	}
-	
-	h1 {
-		padding-bottom: 9px;
-		text-align: center;		
-	}
+.mini-button {
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border: solid 2px $blue;
+  float: left;
+  margin-top: 2px;
+  @include border-radius(8px);
+  @include transition(background-color, 0.3s);
+  @include transition(border-color, 0.3s);
 }
 
 .selected {
-/*	padding-top: 5px;
-  	padding-bottom: 5px;*/
-/*	margin: 0px;*/
-/*	background: $blue;*/
-/*	border-top-style: solid;*/
-/*	border-bottom-style: solid;*/
-/*	border-left-style: solid;*/
-/*	border-top-width: 1px;*/
-/*	border-bottom-width: 1px;*/
-	border-color: $blue;
-	background-color: $lightBlue;
+  .mini-button {
+    border-color: $blue;
+    background-color: $blue;
+  }
+  &.success {
+    .mini-button {
+      border-color: $green;
+      background-color: $green;
+    }
+  }
+}
+
+#stopsAndBuses {
+  margin: 2em auto 0 auto;
+  height: 10px;
+  width: 50%;
+  @media screen and (max-width: 1023px) {
+    width: 95%;
+  }
+  h1 {
+    font-size: 22px;
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 9px;
+  }
+}
+
+#stops {
+  width: 50%;
+  font-size: 18px;
+  float: left;
+  .stop-name {
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0px;
+    cursor: pointer;
+    .stop-name-text {
+      display: block;
+      padding-left: 20px;
+    }
+  }
 }
 
 #buses {
-	width: 50%;
-	padding-left: 50%;
-  
-  /* Stupid fix */
-  padding-top: 3px;
-  /*  display: block; */
-	h1 {
-    padding-bottom: 9px;
-    margin-bottom: 9px;
-		text-align: center;
-	}
+  float: left;
+  width: 50%;
 }
 
 #bus_time_display {
-	font-size: 18px;
-	text-align: left;
+  font-size: 18px;
+  text-align: left;
   display: block;
-	
-	p {
-	}
-	
-	h1 {
-		padding-right: 5px;
-		font-size: 48px;
-		display: inline;
+  h1 {
+    padding-right: 5px;
+    font-size: 48px;
+    display: inline;
     padding-bottom: 0px;
     margin-bottom: 0px;
-	}
-  
+  }
   h3 {
     display: inline;
     padding-bottom: 0px;
     margin-bottom: 0px;
   }
-	
-	.busTime {
-		font-size:24px;
+  .busTime {
+    font-size:24px;
     padding-top: -10px;
     margin-top: -10px;
-	}
-	
-	.headsign {
-		display: inline;
+  }
+  .headsign {
+    display: inline;
     color: #696969;
-	}
-	
-	.bus_and_time {
-	}
+  }
+  .bus_and_time {
+  }
 }
 
 .blue {
-	background-color: $blue;
+  background-color: $blue;
 }
 
 .green {
-	background-color: $green;
+  background-color: $green;
 }
 
 .red {
-	background-color: $red;
+  background-color: $red;
 }
 
 #info {
   text-align: left;
   color: #696969;
-  max-width: 250px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #buses #info{
@@ -169,25 +217,25 @@ body > #main {
 }
 
 #stop {
-	border-bottom-style: solid;
-	border-width: 5px;
-	border-color: $red;
-    font-size: 30px;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: $red;
+  font-size: 25px;
 }
 
 #bus {
-	border-bottom-style: solid;
-	border-width: 5px;
-	border-color: $green;
-    font-size: 30px;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: $green;
+  font-size: 25px;
 }
 
 header {
-	margin-top: 35px;
-	margin-bottom: 40px;
-	text-align: center;
-	
-	h1 {
-		font-size: 64px;
-	}
+  margin-top: 35px;
+  margin-bottom: 40px;
+  text-align: center;
+
+  h1 {
+    font-size: 4.5em;
+  }
 }
