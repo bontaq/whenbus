@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Whenbus.Load_times do
+defmodule Mix.Tasks.Whenbus.LoadTimes do
   import Ecto.Query, only: [from: 2]
   use Mix.Task
 

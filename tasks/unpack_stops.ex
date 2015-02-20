@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Whenbus.Load_stops do
+defmodule Mix.Tasks.Whenbus.LoadStops do
   import Ecto.Query, only: [from: 2]
   use Mix.Task
 
