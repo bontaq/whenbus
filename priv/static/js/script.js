@@ -67,7 +67,7 @@ $(document).ready(function(){
       };
 
       var time = result[x]["departure_time"],
-          amOrPm = 24 >= time[0] >= 12 ? 'am' : 'pm',
+          amOrPm = time[0] < 12 ? 'am' : 'pm',
           hours = time[0] % 12,
           minutes = time[1] < 10 ? '0' + time[1].toString() : time[1],
           parsedTime = ([hours, minutes].join(":")) + amOrPm;
