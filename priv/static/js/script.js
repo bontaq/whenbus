@@ -46,7 +46,7 @@ $(document).ready(function(){
     };
   }
 
-  function select_bus( bus ){
+  function selectBus( bus ){
     busName = $(bus).find('h1').text();
 
     $('.fullBus').each(function(){
@@ -56,7 +56,7 @@ $(document).ready(function(){
     });
   }
 
-  function add_buses(result) {
+  function displayBuses(result) {
     if (result.length == 0) {
       $('#bus_time_display').append('<h4>Sorry no more buses here tonight :(</h4>');
     }
@@ -91,7 +91,7 @@ $(document).ready(function(){
 
     $('.fullBus').each(function( i ){
       $(this).on("click", "", function(){
-        select_bus( this );
+        selectBus(this);
       });
     });
 
@@ -99,91 +99,65 @@ $(document).ready(function(){
     $('#bus_time_display').append('<p><span id="more">next hour</span></p>');
   };
 
-  // function next_hour() {
-  //   console.log('next hour called');
+  function next_hour() {
+    hourOffset += 1;
+    setBuses($('div[class~="selected"]').attr("value"), hourOffset);
+  }
 
-  //   hourOffset += 1
+  function formattedTime(offset) {
+    var currentTime = new Date(),
+        formattedTime = {};
 
-  //   var d = new Date()
-  //   hours = d.getHours() + hourOffset
-  //   minutes = d.getMinutes()
+    currentTime.setTime(currentTime.getTime() + (offset * 60 * 60 * 1000)),
+    formattedTime = {
+      date: [
+        currentTime.getFullYear(),
+        currentTime.getMonth(),
+        currentTime.getDate()],
+      time: [
+        ((currentTime.getHours() + offset) % 24),
+        currentTime.getMinutes(),
+        0]
+    };
+    return formattedTime;
+  }
 
-  //   console.log(hours)
-  //   console.log(minutes)
-
-  //   $.ajax({
-  //     url: "/busTimes/",
-  //     type: "POST",
-  //     dataType: "json",
-  //     data: {
-  //       'stopId': $( 'p[class="selected"]' ).attr("value"),
-  //       'hours': hours,
-  //       'minutes': minutes,
-  //     },
-
-  //     complete: function() {
-  //     },
-
-  //     success: function( result ) {
-  //       	    $('#bus_time_display').fadeOut('fast', function(){
-  // 			$('#bus_time_display').empty()
-
-  // 			add_buses( result );
-
-  //       $('#more').on("click", "", function(){
-  //         next_hour();
-  //       });
-  //       	    });
-  //     },
-
-  //     error: function() {
-  //     },
-  //   });
-  // };
-
-  $('#stops').on("click", "div", function(){
-    var busName = "",
-        hourOffset = 0,
-        currentTime = new Date(),
-        formattedTime = {
-          date: [
-            currentTime.getFullYear(),
-            currentTime.getMonth(),
-            currentTime.getDate()
-        ],
-          time: [
-            currentTime.getHours(),
-            currentTime.getMinutes(),
-            0
-          ]
-        },
-        $self = $(this);
-
-    $('#stops div').each(function() {
-      $(this).removeClass("selected");
-      $(this).removeClass("success");
-    });
-    $self.addClass("selected");
-
+  function setBuses(stopId, timeOffset, callback) {
+    timeOffset = timeOffset == undefined ? 0 : timeOffset;
+    callback = callback == undefined ? function() {} : callback;
     $.ajax({
       url: "/api/stoptimes",
       type: "GET",
       dataType: "json",
       data: {
-        'stopId': $(this).attr("value"),
-        'time': formattedTime
+        'stopId': stopId,
+        'time': formattedTime(timeOffset)
       },
       success: function(result) {
+        callback();
 	$('#bus_time_display').fadeOut('fast', function(){
   	  $('#bus_time_display').empty();
-  	  add_buses(result);
-          $self.addClass("success");
-
+          displayBuses(result);
           $('#more').on("click", "", function(){
-            // next_hour();
+            next_hour();
           });
 	});
       }
+    });
+  }
+
+  $('#stops').on("click", "div", function(){
+    hourOffset = 0;
+    var $self = $(this);
+
+    $('#stops div').each(function() {
+      $(this).removeClass("selected");
+      $(this).removeClass("success");
+    });
+
+    $self.addClass("selected");
+    setBuses($self.attr("value"), 0, function() {
+      $self.addClass("success");
     });
   });
 });
