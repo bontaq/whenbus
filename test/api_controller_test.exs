@@ -262,4 +262,13 @@ defmodule Whenbus.ApiControllerTest do
     res = Whenbus.ApiController.which_day({2015, 2, 16}, {1, 10, 0})
     assert res == :sunday
   end
+
+  test "time out of range error" do
+    # future_time was going over 24 hours
+    %{"date" => ["2015", "1", "20"], "time" => ["23", "18", "0"]}
+    [] = Whenbus.ApiController.search_stop_times(
+      "2",
+      %{"date" => {2015, 1, 20}, "time" => {23, 18, 0}}
+    )
+  end
 end

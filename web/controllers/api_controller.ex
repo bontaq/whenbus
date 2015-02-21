@@ -65,7 +65,7 @@ defmodule Whenbus.ApiController do
 
   def search_stop_times(stop_id, %{"date" => date, "time" => time}) do
     {hour, minute, second} = time
-    future_time = {(hour + 1), minute, second}
+    future_time = {rem((hour + 1), 24), minute, second}
 
     day_type = case which_day(date, time) do
       :weekday -> 0
