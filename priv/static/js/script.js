@@ -99,8 +99,9 @@ $(document).ready(function(){
     $('#bus_time_display').append('<p><span id="more">next hour</span></p>');
   };
 
-  function next_hour() {
+  function nextHour() {
     hourOffset += 1;
+    console.info(hourOffset);
     setBuses($('div[class~="selected"]').attr("value"), hourOffset);
   }
 
@@ -115,7 +116,7 @@ $(document).ready(function(){
         currentTime.getMonth(),
         currentTime.getDate()],
       time: [
-        ((currentTime.getHours() + offset) % 24),
+        (currentTime.getHours() % 24),
         currentTime.getMinutes(),
         0]
     };
@@ -124,6 +125,7 @@ $(document).ready(function(){
 
   function setBuses(stopId, timeOffset, callback) {
     timeOffset = timeOffset == undefined ? 0 : timeOffset;
+    console.info(timeOffset);
     callback = callback == undefined ? function() {} : callback;
     $.ajax({
       url: "/api/stoptimes",
@@ -139,7 +141,7 @@ $(document).ready(function(){
   	  $('#bus_time_display').empty();
           displayBuses(result);
           $('#more').on("click", "", function(){
-            next_hour();
+            nextHour();
           });
 	});
       }
