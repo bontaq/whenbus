@@ -18,12 +18,12 @@ defmodule Whenbus.ApiController do
     Whenbus.Repo.all(query)
   end
   def search_stops(lat, lon) do
-    {new_lat, _} = Integer.parse(lat)
-    {new_lon, _} = Integer.parse(lon)
+    {new_lat, _} = Float.parse(lat)
+    {new_lon, _} = Float.parse(lon)
     query = from s in Whenbus.Stop,
       select: s,
-      limit: 10,
-      order_by: fragment("earth_distance(ll_to_earth(?, ?), ll_to_earth(?, ?))", s.latitude, s.longitude, ^new_lat, ^new_lon)
+      order_by: fragment("earth_distance(ll_to_earth(?, ?), ll_to_earth(?, ?))", ^new_lat, ^new_lon, s.latitude, s.longitude),
+      limit: 10
 
     Whenbus.Repo.all(query)
   end
