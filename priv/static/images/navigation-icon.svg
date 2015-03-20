@@ -6,8 +6,8 @@
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
         <g id="icon_512x512@2x" sketch:type="MSArtboardGroup">
-            <circle id="Oval-1" stroke="#4A4A4A" stroke-width="79" sketch:type="MSShapeGroup" cx="512.5" cy="512.5" r="411.5"></circle>
-            <circle id="Oval-2" fill="#4A4A4A" sketch:type="MSShapeGroup" cx="512" cy="512" r="240"></circle>
+            <circle id="Oval-1" stroke="#c9c9c9" stroke-width="79" sketch:type="MSShapeGroup" cx="512.5" cy="512.5" r="411.5"></circle>
+            <circle id="Oval-2" fill="#c9c9c9" sketch:type="MSShapeGroup" cx="512" cy="512" r="240"></circle>
             <rect id="Rectangle-1" fill="#4A4A4A" sketch:type="MSShapeGroup" x="924" y="463" width="100" height="99"></rect>
             <rect id="Rectangle-2" fill="#4A4A4A" sketch:type="MSShapeGroup" x="1" y="463" width="100" height="99"></rect>
             <rect id="Rectangle-3" fill="#4A4A4A" sketch:type="MSShapeGroup" x="462" y="2" width="100" height="99"></rect>

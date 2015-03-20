@@ -8,11 +8,13 @@
 
 <section>
   <div id="controls">
+    <div id="gps-locator" style="display: none;">
+      <span id="gps-button">
+        <span id="gps-button-icon"></span>
+      </span>
+    </div>
     <input type="text" id="search" placeholder="Stop intersection&hellip;">
-    <span id="gps-button" style="display: none;">
-      <span id="gps-button-icon"></span>
-    </span>
-  </div>
+ </div>
 </section>
 
 <div id="stopsAndBuses">

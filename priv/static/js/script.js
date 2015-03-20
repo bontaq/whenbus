@@ -5,7 +5,7 @@ $(document).ready(function(){
       busName = "";
 
   if(navigator.geolocation) {
-    $('#gps-button').show();
+    $('#gps-locator').show();
   }
 
   $('#search').keyup(function(){
