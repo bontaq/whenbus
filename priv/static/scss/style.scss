@@ -1,5 +1,7 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/transition";
+@import "compass/css3/transform";
+@import "compass/css3/animation";
 
 $green: #94E07B;
 $lightGreen: #B1DEA2;
@@ -116,8 +118,54 @@ header {
   }
 }
 
+@include keyframes(spin) {
+  from {
+    @include transform(rotate(0deg));
+  }
+  to {
+    @include transform(rotate(360deg));
+  }
+}
+
+#gps-button {
+  cursor: pointer;
+  border: 2px solid #696969;
+  border-bottom-width: 3px;
+  margin-left: 10px;
+  margin-bottom: 1px;
+  margin-top: 3px;
+  padding: 3px;
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  position: absolute;
+  @include border-radius(4px);
+  &:hover {
+    border-bottom-width: 2px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+  }
+  &.search-running {
+    border-bottom-width: 2px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    #gps-button-icon {
+      @include animation(spin 2s linear infinite);
+    }
+  }
+  #gps-button-icon {
+    height: 90%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    background-image: url("/images/navigation-icon.svg");
+    background-repeat: no-repeat;
+  }
+}
+
 .fullBus {
-  margin-left: 5px;
+  margin-left: 5;
   cursor: pointer;
 }
 

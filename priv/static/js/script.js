@@ -63,10 +63,12 @@ $(document).ready(function(){
           'longitude': position.coords.longitude
         },
         success: function(results) {
+          $('#gps-button').removeClass('search-running');
           displayStops(results);
         }
       });
     }
+    $('#gps-button').addClass('search-running');
     var position = navigator.geolocation.getCurrentPosition(callback);
   });
 
