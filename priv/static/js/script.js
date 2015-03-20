@@ -4,6 +4,10 @@ $(document).ready(function(){
       hourOffset = 0,
       busName = "";
 
+  if(navigator.geolocation) {
+    $('#gps-button').show();
+  }
+
   $('#search').keyup(function(){
     clearTimeout(typingTimer);
     if ($('#search').val()) {
@@ -11,9 +15,28 @@ $(document).ready(function(){
     }
   });
 
+  function displayStops(stops) {
+    $('#stops .stop-name').each(function (i){
+      $(this).fadeOut('fast', function() {
+        $(this).remove();
+      });
+    });
+    for (x in stops) {
+      $('#stops').append(
+        '<div class="stop-name" style="display: none;" value="' +
+          stops[x]["stop_id"] + '">' +
+        '<span class="mini-button"></span>' +
+        '<span class="stop-name-text">' +
+          stops[x]["name"] + '</span>' +
+        '</div>');
+    }
+    $('#stops div').each(function(i) {
+      $(this).delay(250).fadeIn();
+    });
+  }
+
   function search() {
     var searchTerm = $('#search').val();
-
     if (searchTerm.length > 3) {
       $.ajax({
         url: "/api/find",
@@ -22,32 +45,35 @@ $(document).ready(function(){
         data: {
           "name": searchTerm
         },
-        success: function( result ) {
-          $('#stops .stop-name').each(function ( i ){
-            $(this).fadeOut('fast', function() {
-              $(this).remove();
-            });
-          });
-          for (x in result) {
-            $('#stops').append(
-              '<div class="stop-name" style="display: none;" value="' +
-                result[x]["stop_id"] + '">' +
-                '<span class="mini-button"></span>' +
-                '<span class="stop-name-text">' +
-                result[x]["name"] + '</span>' +
-                '</div>');
-          }
-
-          $('#stops div').each(function( i ) {
-            $(this).delay(250).fadeIn();
-          });
+        success: function(results) {
+          displayStops(results);
         }
       });
     };
   }
 
+  $('#gps-button').on('click', function() {
+    function callback(position) {
+      $.ajax({
+        url: "/api/closeststops",
+        type: "GET",
+        dataType: "json",
+        data: {
+          'latitude': position.coords.latitude,
+          'longitude': position.coords.longitude
+        },
+        success: function(results) {
+          $('#gps-button').removeClass('search-running');
+          displayStops(results);
+        }
+      });
+    }
+    $('#gps-button').addClass('search-running');
+    var position = navigator.geolocation.getCurrentPosition(callback);
+  });
+
   function selectBus( bus ){
-    busName = $(bus).find('h1').text();
+    var busName = $(bus).find('h1').text();
 
     $('.fullBus').each(function(){
       if ( $(this).find('h1').text() != busName ) {
@@ -85,11 +111,11 @@ $(document).ready(function(){
       );
     }
 
-    $('#bus_time_display p').each(function( i ) {
+    $('#bus_time_display p').each(function(i) {
       $(this).delay(100).fadeIn();
     });
 
-    $('.fullBus').each(function( i ){
+    $('.fullBus').each(function(i){
       $(this).on("click", "", function(){
         selectBus(this);
       });
@@ -101,7 +127,6 @@ $(document).ready(function(){
 
   function nextHour() {
     hourOffset += 1;
-    console.info(hourOffset);
     setBuses($('div[class~="selected"]').attr("value"), hourOffset);
   }
 

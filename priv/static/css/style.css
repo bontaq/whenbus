@@ -1,4 +1,4 @@
-/* line 11, ../scss/style.scss */
+/* line 13, ../scss/style.scss */
 body {
   font-family: "Helvetica", "Arial", "Sans-serif";
   color: #373737;
@@ -6,67 +6,67 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* line 18, ../scss/style.scss */
+/* line 20, ../scss/style.scss */
 html, body, #main {
   height: 88%;
 }
 
-/* line 22, ../scss/style.scss */
+/* line 24, ../scss/style.scss */
 body > #main {
   height: auto;
   min-height: 100%;
 }
 
-/* line 27, ../scss/style.scss */
+/* line 29, ../scss/style.scss */
 header {
   margin-top: 35px;
   margin-bottom: 40px;
   text-align: center;
 }
 @media screen and (max-width: 1023px) {
-  /* line 27, ../scss/style.scss */
+  /* line 29, ../scss/style.scss */
   header {
     margin-top: 0px;
   }
-  /* line 33, ../scss/style.scss */
+  /* line 35, ../scss/style.scss */
   header h1 {
     margin-top: 10px;
   }
 }
-/* line 37, ../scss/style.scss */
+/* line 39, ../scss/style.scss */
 header h1 {
   font-size: 4.5em;
 }
 
-/* line 42, ../scss/style.scss */
+/* line 44, ../scss/style.scss */
 #magic-whenbus {
   position: relative;
   height: 9em;
 }
 @media screen and (max-width: 1023px) {
-  /* line 42, ../scss/style.scss */
+  /* line 44, ../scss/style.scss */
   #magic-whenbus {
     height: 5em;
   }
 }
-/* line 48, ../scss/style.scss */
+/* line 50, ../scss/style.scss */
 #magic-whenbus h1 {
   position: absolute;
   width: 100%;
 }
-/* line 51, ../scss/style.scss */
+/* line 53, ../scss/style.scss */
 #magic-whenbus h1.first {
   color: #FF7A7A;
   left: -0px;
 }
-/* line 55, ../scss/style.scss */
+/* line 57, ../scss/style.scss */
 #magic-whenbus h1.second {
   color: #9EF0FF;
   left: -3px;
   top: 3px;
   z-index: -1;
 }
-/* line 61, ../scss/style.scss */
+/* line 63, ../scss/style.scss */
 #magic-whenbus h1.third {
   color: #94E07B;
   left: -6px;
@@ -74,7 +74,7 @@ header h1 {
   z-index: -2;
 }
 
-/* line 70, ../scss/style.scss */
+/* line 72, ../scss/style.scss */
 #more {
   display: inline-block;
   font-size: 22px;
@@ -88,17 +88,17 @@ header h1 {
   -webkit-border-radius: 4px 4px;
   border-radius: 4px / 4px;
 }
-/* line 80, ../scss/style.scss */
+/* line 82, ../scss/style.scss */
 #more h1 {
   font-weight: normal;
 }
-/* line 83, ../scss/style.scss */
+/* line 85, ../scss/style.scss */
 #more:hover {
   margin-top: 0px;
   border-bottom-width: 4px;
 }
 
-/* line 89, ../scss/style.scss */
+/* line 91, ../scss/style.scss */
 #footer {
   clear: both;
   position: relative;
@@ -111,13 +111,13 @@ header h1 {
   color: #696969;
 }
 
-/* line 101, ../scss/style.scss */
+/* line 103, ../scss/style.scss */
 #main {
   text-align: center;
   padding-bottom: 15px;
 }
 
-/* line 106, ../scss/style.scss */
+/* line 108, ../scss/style.scss */
 #search {
   height: 30px;
   font-size: 22px;
@@ -129,19 +129,99 @@ header h1 {
   -webkit-transition: border, 0.3s;
   transition: border, 0.3s;
 }
-/* line 113, ../scss/style.scss */
+/* line 115, ../scss/style.scss */
 #search:focus {
   outline: none;
   border-bottom: solid 2px #969696;
 }
 
-/* line 119, ../scss/style.scss */
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/* line 130, ../scss/style.scss */
+#gps-button {
+  cursor: pointer;
+  border: 2px solid #696969;
+  border-bottom-width: 3px;
+  margin-left: 10px;
+  margin-bottom: 1px;
+  margin-top: 3px;
+  padding: 3px;
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  position: absolute;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 143, ../scss/style.scss */
+#gps-button:hover {
+  border-bottom-width: 2px;
+  margin-bottom: 0px;
+  margin-top: 4px;
+}
+/* line 148, ../scss/style.scss */
+#gps-button.search-running {
+  border-bottom-width: 2px;
+  margin-bottom: 0px;
+  margin-top: 4px;
+}
+/* line 152, ../scss/style.scss */
+#gps-button.search-running #gps-button-icon {
+  -moz-animation: spin 2s linear infinite;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+/* line 156, ../scss/style.scss */
+#gps-button #gps-button-icon {
+  height: 90%;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-image: url("/images/navigation-icon.svg");
+  background-repeat: no-repeat;
+}
+
+/* line 167, ../scss/style.scss */
 .fullBus {
-  margin-left: 5px;
+  margin-left: 5;
   cursor: pointer;
 }
 
-/* line 124, ../scss/style.scss */
+/* line 172, ../scss/style.scss */
 .mini-button {
   display: inline-block;
   height: 8px;
@@ -162,30 +242,30 @@ header h1 {
   transition: border-color, 0.3s;
 }
 
-/* line 137, ../scss/style.scss */
+/* line 185, ../scss/style.scss */
 .selected .mini-button {
   border-color: #70E1FA;
   background-color: #70E1FA;
 }
-/* line 142, ../scss/style.scss */
+/* line 190, ../scss/style.scss */
 .selected.success .mini-button {
   border-color: #94E07B;
   background-color: #94E07B;
 }
 
-/* line 149, ../scss/style.scss */
+/* line 197, ../scss/style.scss */
 #stopsAndBuses {
   margin: 2em auto 0 auto;
   height: 10px;
   width: 50%;
 }
 @media screen and (max-width: 1023px) {
-  /* line 149, ../scss/style.scss */
+  /* line 197, ../scss/style.scss */
   #stopsAndBuses {
     width: 95%;
   }
 }
-/* line 156, ../scss/style.scss */
+/* line 204, ../scss/style.scss */
 #stopsAndBuses h1 {
   font-size: 22px;
   text-align: center;
@@ -193,13 +273,13 @@ header h1 {
   padding-bottom: 9px;
 }
 
-/* line 164, ../scss/style.scss */
+/* line 212, ../scss/style.scss */
 #stops {
   width: 50%;
   font-size: 18px;
   float: left;
 }
-/* line 168, ../scss/style.scss */
+/* line 216, ../scss/style.scss */
 #stops .stop-name {
   text-align: left;
   padding-top: 10px;
@@ -207,25 +287,25 @@ header h1 {
   margin: 0px;
   cursor: pointer;
 }
-/* line 174, ../scss/style.scss */
+/* line 222, ../scss/style.scss */
 #stops .stop-name .stop-name-text {
   display: block;
   padding-left: 20px;
 }
 
-/* line 181, ../scss/style.scss */
+/* line 229, ../scss/style.scss */
 #buses {
   float: left;
   width: 50%;
 }
 
-/* line 186, ../scss/style.scss */
+/* line 234, ../scss/style.scss */
 #bus_time_display {
   font-size: 18px;
   text-align: left;
   display: block;
 }
-/* line 190, ../scss/style.scss */
+/* line 238, ../scss/style.scss */
 #bus_time_display h1 {
   padding-right: 5px;
   font-size: 48px;
@@ -233,53 +313,53 @@ header h1 {
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
-/* line 197, ../scss/style.scss */
+/* line 245, ../scss/style.scss */
 #bus_time_display h3 {
   display: inline;
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
-/* line 202, ../scss/style.scss */
+/* line 250, ../scss/style.scss */
 #bus_time_display .busTime {
   font-size: 24px;
   padding-top: -10px;
   margin-top: -10px;
 }
-/* line 207, ../scss/style.scss */
+/* line 255, ../scss/style.scss */
 #bus_time_display .headsign {
   display: inline;
   color: #696969;
 }
 
-/* line 215, ../scss/style.scss */
+/* line 263, ../scss/style.scss */
 .blue {
   background-color: #70E1FA;
 }
 
-/* line 219, ../scss/style.scss */
+/* line 267, ../scss/style.scss */
 .green {
   background-color: #94E07B;
 }
 
-/* line 223, ../scss/style.scss */
+/* line 271, ../scss/style.scss */
 .red {
   background-color: #FF7A7A;
 }
 
-/* line 227, ../scss/style.scss */
+/* line 275, ../scss/style.scss */
 #info {
   text-align: left;
   color: #696969;
 }
 
-/* line 232, ../scss/style.scss */
+/* line 280, ../scss/style.scss */
 #buses #info {
   padding-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
-/* line 238, ../scss/style.scss */
+/* line 286, ../scss/style.scss */
 #stop {
   border-bottom-style: solid;
   border-width: 2px;
@@ -287,7 +367,7 @@ header h1 {
   font-size: 25px;
 }
 
-/* line 245, ../scss/style.scss */
+/* line 293, ../scss/style.scss */
 #bus {
   border-bottom-style: solid;
   border-width: 2px;

@@ -7,7 +7,12 @@
 </header>
 
 <section>
-  <input type="text" id="search" placeholder="Stop intersection&hellip;">
+  <div id="controls">
+    <input type="text" id="search" placeholder="Stop intersection&hellip;">
+    <span id="gps-button" style="display: none;">
+      <span id="gps-button-icon"></span>
+    </span>
+  </div>
 </section>
 
 <div id="stopsAndBuses">

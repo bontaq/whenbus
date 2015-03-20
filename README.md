@@ -1,8 +1,10 @@
-# Whenbus
+A faster way to lookup bus times for Pittsburgh, PA.
 
-To start your new Phoenix application:
+After installing Elixir and postgres (I used brew for both), you're just a few steps away.
 
 1. Install dependencies with `mix deps.get`
 2. Start Phoenix endpoint with `mix phoenix.server`
 
-Now you can visit `localhost:4000` from your browser.
+In the postgres shell, for both test & main database, run
+CREATE EXTENSION cube;
+CREATE EXTENSION earthdistance;
