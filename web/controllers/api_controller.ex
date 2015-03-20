@@ -17,6 +17,16 @@ defmodule Whenbus.ApiController do
 
     Whenbus.Repo.all(query)
   end
+  def search_stops(lat, lon) do
+    {new_lat, _} = Integer.parse(lat)
+    {new_lon, _} = Integer.parse(lon)
+    query = from s in Whenbus.Stop,
+      select: s,
+      limit: 10,
+      order_by: fragment("earth_distance(ll_to_earth(?, ?), ll_to_earth(?, ?))", s.latitude, s.longitude, ^new_lat, ^new_lon)
+
+    Whenbus.Repo.all(query)
+  end
 
   def find(conn, %{"name" => name}) do
     results = search_stops(name)
@@ -101,5 +111,12 @@ defmodule Whenbus.ApiController do
   end
   def stop_times(conn, _) do
     text(conn, "That's no good - from find stop times")
+  end
+
+  def closest_stops(conn, %{"latitude" => lat, "longitude" => lon}) do
+    results = search_stops(lat, lon)
+    # stops = [%{}]
+    # text(conn, "geh weg!")
+    json(conn, results)
   end
 end

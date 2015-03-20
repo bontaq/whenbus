@@ -23,5 +23,6 @@ defmodule Whenbus.Router do
 
     get "/find", ApiController, :find
     get "/stoptimes", ApiController, :stop_times
+    get "/closeststops", ApiController, :closest_stops
   end
 end

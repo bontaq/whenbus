@@ -271,4 +271,16 @@ defmodule Whenbus.ApiControllerTest do
       %{"date" => {2015, 1, 20}, "time" => {23, 18, 0}}
     )
   end
+
+  test "simple stop get by lat/lon" do
+    %Stop {name: "5TH & WHARTON",
+           stop_id: "10",
+           latitude: 5.5,
+           longitude: 4.5}
+    |> Repo.insert
+    i_lat = "40.404844"
+    i_lon = "-79.935319"
+    [stop] = Whenbus.ApiController.search_stops(i_lat, i_lon)
+    assert stop.stop_id == "10"
+  end
 end
