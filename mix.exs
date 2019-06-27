@@ -4,7 +4,7 @@ defmodule Whenbus.Mixfile do
   def project do
     [app: :whenbus,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.8.1",
      elixirc_paths: ["lib", "web", "tasks"],
      compilers: [:phoenix] ++ Mix.compilers,
      deps: deps]
@@ -22,9 +22,13 @@ defmodule Whenbus.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.8.0"},
-     {:cowboy, "~> 1.0"},
-     {:postgrex, ">= 0.7.0"},
-     {:ecto, "0.8.1"}]
+    [{:phoenix, "~> 1.4.8"},
+     {:phoenix_html, ">= 0.0.0"},
+     {:cowboy, ">= 1.0.0"},
+     {:plug_cowboy, ">= 0.0.0"},
+     {:ecto_sql, "~> 3.0"},
+     {:postgrex, ">= 0.0.0"},
+     {:poison, "4.0.1"},
+     {:ecto, "3.1.6"}]
   end
 end

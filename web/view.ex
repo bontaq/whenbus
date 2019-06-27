@@ -3,7 +3,7 @@ defmodule Whenbus.View do
 
   # The quoted expression returned by this block is applied
   # to this module and all other views that use this module.
-  using do
+  defmacro __using__(_opts) do
     quote do
       # Import common functionality
       import Whenbus.Router.Helpers

@@ -1,5 +1,5 @@
 defmodule Whenbus.Trip do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "trips" do
     field :route, :string

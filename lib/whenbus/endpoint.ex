@@ -24,5 +24,5 @@ defmodule Whenbus.Endpoint do
     signing_salt: "WyWXWAqX",
     encryption_salt: "OUqdaALk"
 
-  plug :router, Whenbus.Router
+  plug Whenbus.Router
 end

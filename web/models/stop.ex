@@ -1,5 +1,5 @@
 defmodule Whenbus.Stop do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "stops" do
     field :name, :string

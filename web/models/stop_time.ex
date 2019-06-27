@@ -1,5 +1,5 @@
 defmodule Whenbus.StopTime do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "stop_times" do
     field :trip_id, :string
